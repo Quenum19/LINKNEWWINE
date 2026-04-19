@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>NW Church - Programme Culte | A4 Paysage</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e2e8f0;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Impression A4 paysage */
+        @media print {
+            body {
+                background: white;
+                padding: 0;
+                margin: 0;
+            }
+            .no-print {
+                display: none !important;
+            }
+            .programme-container {
+                box-shadow: none;
+                margin: 0;
+                padding: 0;
+                width: 100%;
+                height: auto;
+                border-radius: 0;
+                max-width: 100%;
+            }
+            .programme-card, .academy-card {
+                break-inside: avoid;
+                page-break-inside: avoid;
+            }
+            input {
+                border: none !important;
+                background: transparent !important;
+                color: #1e293b !important;
+                padding: 0 !important;
+                font-weight: 600 !important;
+            }
+            @page {
+                size: A4 landscape;
+                margin: 0.5cm;
+            }
+        }
+
+        /* Écran */
+        @media screen and (max-width: 768px) {
+            body {
+                padding: 12px;
+            }
+            .header-flex {
+                flex-direction: column !important;
+                align-items: flex-start !important;
+            }
+            .info-group {
+                width: 100% !important;
+                justify-content: space-between !important;
+            }
+            .info-card {
+                flex: 1 !important;
+                min-width: 0 !important;
+            }
+            .two-columns {
+                grid-template-columns: 1fr !important;
+                gap: 12px !important;
+            }
+            .academy-grid {
+                grid-template-columns: 1fr !important;
+                gap: 16px !important;
+            }
+            .footer-flex {
+                flex-direction: column !important;
+                gap: 8px !important;
+                text-align: center !important;
+            }
+        }
+
+        @media screen and (min-width: 769px) and (max-width: 1024px) {
+            .two-columns {
+                gap: 12px !important;
+            }
+            .programme-card div {
+                padding: 8px 10px !important;
+            }
+        }
+
+        .programme-container {
+            max-width: 297mm;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 20px 35px -12px rgba(0,0,0,0.2);
+        }
+
+        /* Carte unique */
+        .programme-card {
+            background: #ffffff;
+            border-radius: 10px;
+            border-left: 4px solid #c03a55;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            height: 100%;
+        }
+
+        .programme-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 14px -6px rgba(0,0,0,0.12);
+        }
+
+        .programme-card-highlight {
+            background: #fef5f5;
+            border-left: 4px solid #c03a55;
+        }
+
+        .time-label {
+            font-weight: 700;
+            font-size: 11px;
+            color: #c03a55;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-print {
+            background: #c03a55;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 40px;
+            font-weight: 700;
+            font-size: 12px;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-print:hover {
+            background: #a42e46;
+        }
+
+        .editable-input {
+            width: 100%;
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 6px 10px;
+            font-size: 12px;
+            font-weight: 600;
+            font-family: 'Inter', sans-serif;
+            margin-top: 6px;
+        }
+
+        .editable-input:focus {
+            outline: none;
+            border-color: #c03a55;
+        }
+
+        .info-card {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 8px 14px;
+            border-left: 3px solid #c03a55;
+        }
+
+        .info-label {
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            color: #c03a55;
+            margin-bottom: 2px;
+        }
+
+        /* Académie */
+        .academy-card {
+            background: #ffffff;
+            border-radius: 10px;
+            border-left: 4px solid #c03a55;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            overflow: hidden;
+        }
+
+        .academy-header {
+            background: #fef5f5;
+            padding: 10px 16px;
+            border-bottom: 1px solid #fee2e2;
+        }
+
+        .academy-title {
+            font-weight: 800;
+            font-size: 14px;
+            color: #c03a55;
+        }
+
+        /* Utilitaires */
+        .text-ellipsis {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
+
+        @media print {
+            .programme-card:hover {
+                transform: none;
+            }
+            .text-ellipsis {
+                white-space: normal;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div style="width: 100%; max-width: 297mm;">
+        
+        <!-- Barre outils non imprimable -->
+        <div class="no-print" style="margin-bottom: 10px;">
+            <div style="background: white; border-radius: 50px; padding: 6px 20px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.08);">
+                <div style="display: flex; align-items: center; gap: 10px;">
+                    <div style="width: 55px; height: 55px; background: #c03a55; border-radius: 14px; display: flex; align-items: center; justify-content: center;">
+                        <span style="color: white; font-weight: 900; font-size: 24px;">NW</span>
+                    </div>
+                    <span style="font-weight: 800; font-size: 13px; color: #1e293b;">NW CHURCH</span>
+                </div>
+                <button onclick="window.print()" class="btn-print">IMPRIMER LE PROGRAMME</button>
+            </div>
+        </div>
+
+        <!-- Programme principal -->
+        <div class="programme-container">
+            
+            <!-- HEADER responsive -->
+            <div style="padding: 16px 24px; background: white; border-bottom: 1px solid #f0f2f5;">
+                <div class="header-flex" style="display: flex; justify-content: space-between; align-items: center; gap: 16px; flex-wrap: wrap;">
+                    
+                    <!-- Logo + titre -->
+                    <div style="display: flex; align-items: center; gap: 12px; flex-shrink: 0;">
+                        <!-- <div style="width: 60px; height: 60px; background: #f7dce2; border-radius: 12px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 14px;"> -->
+                            <img src="publics/images/LOGO-NEW-WINE-png.png" alt="logo NW" style="width: 60px; height: 60px;">
+                        <!-- </div> -->
+                        <div>
+                            <h1 style="font-size: clamp(24px, 6vw, 32px); font-weight: 900; letter-spacing: -1.5px; color: #0f172a; line-height: 1;">PROGRAMME CULTE</h1>
+                            <p style="font-size: 8px; font-weight: 700; letter-spacing: 2px; color: #94a3b8;">NEW WINE CHURCH</p>
+                        </div>
+                    </div>
+
+                    <!-- 3 champs : DATE / MC / ORATEUR -->
+                    <div class="info-group" style="display: flex; gap: 10px; flex-wrap: wrap;">
+                        <div class="info-card" style="min-width: 110px; flex: 1;">
+                            <div class="info-label">DATE</div>
+                            <input type="text" class="editable-input" style="background: transparent; padding: 0; margin-top: 0; font-size: clamp(11px, 3vw, 12px);" value="DIMANCHE 19 AVRIL 2026">
+                        </div>
+                        <div class="info-card" style="min-width: 100px; flex: 1;">
+                            <div class="info-label">MC</div>
+                            <input type="text" class="editable-input" style="background: transparent; padding: 0; margin-top: 0; font-size: clamp(11px, 3vw, 12px);" value="FRERE DAVID">
+                        </div>
+                        <div class="info-card" style="min-width: 120px; flex: 1;">
+                            <div class="info-label">ORATEUR</div>
+                            <input type="text" class="editable-input" style="background: transparent; padding: 0; margin-top: 0; font-size: clamp(11px, 3vw, 12px);" value="PASTEUR MARC">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GRILLE 2 COLONNES responsive -->
+            <div class="two-columns" style="padding: 16px 24px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px;">
+                
+                <!-- COLONNE GAUCHE -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+                    
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">12h15 – 12h25</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Installation & Mise en place des tables</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">10 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card programme-card-highlight">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">12h25 – 12h55</div>
+                            <div style="font-weight: 900; font-size: clamp(18px, 5vw, 20px); color: #c03a55; margin-top: 2px;">MONTAGNE</div>
+                            <div style="font-size: 10px; font-weight: 700; color: #e76f51; margin-top: 2px;">30 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">12h55 – 13h00</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Installation et intro</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">05 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h00 – 13h10</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Louange</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">10 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h10 – 13h20</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Dancing Star</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">10 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h20 – 13h35</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Adoration</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">15 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h35 – 13h45</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">MC, Offrandes et Dimes</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">10 min</div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- COLONNE DROITE -->
+                <div style="display: flex; flex-direction: column; gap: 8px;">
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h45 – 13h55</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Annonces</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">10 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">13h55 – 14h00</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Ministere</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">05 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card programme-card-highlight">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">14h00 – 14h50</div>
+                            <div style="font-weight: 900; font-size: clamp(16px, 4.5vw, 18px); color: #0f172a; margin-top: 2px;">PREDICATION</div>
+                            <div style="font-size: 10px; font-weight: 700; color: #e76f51; margin-top: 2px;">50 min</div>
+                            <input type="text" class="editable-input" style="margin-top: 6px; font-size: 11px; padding: 5px 8px;" value="Theme : La Puissance de l'Esprit">
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">14h50 – 14h55</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Presentation des nouveaux</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">05 min</div>
+                        </div>
+                    </div>
+
+                    <div class="programme-card">
+                        <div style="padding: 10px 12px;">
+                            <div class="time-label">14h55 – 15h00</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">Priere finale</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #64748b; margin-top: 2px;">05 min</div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <!-- ACADEMIE DE FONDATION -->
+            <div style="padding: 0 24px 16px 24px;">
+                <div class="academy-card">
+                    <div class="academy-header">
+                        <div class="academy-title">ACADEMIE DE FONDATION</div>
+                    </div>
+                    <div class="academy-grid" style="padding: 12px 16px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px;">
+                        
+                        <div>
+                            <div class="time-label" style="font-size: 10px;">15h00 – 15h40</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">COURS</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #e76f51; margin-top: 2px;">40 min</div>
+                            <input type="text" class="editable-input" style="margin-top: 5px; font-size: 11px; padding: 5px 8px;" value="Les Fondations de la Foi">
+                        </div>
+                        
+                        <div>
+                            <div class="time-label" style="font-size: 10px;">15h40 – 16h00</div>
+                            <div style="font-weight: 700; font-size: clamp(12px, 3.5vw, 13px); margin-top: 3px;">BILAN & ECHANGES</div>
+                            <div style="font-size: 10px; font-weight: 600; color: #e76f51; margin-top: 2px;">20 min</div>
+                            <input type="text" class="editable-input" style="margin-top: 5px; font-size: 11px; padding: 5px 8px;" value="Conclusion et perspectives">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FOOTER responsive -->
+            <div class="footer-flex" style="background: #f8fafc; padding: 8px 24px; border-top: 1px solid #e2e8f0; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px;">
+                <div style="display: flex; align-items: center; gap: 8px;">
+                    <div style="width: 24px; height: 24px; background: #c03a55; border-radius: 8px; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 9px;">NW</div>
+                    <span style="font-size: 7px; font-weight: 700; letter-spacing: 1px; color: #64748b;">NEW WINE CREATIVE LAB</span>
+                </div>
+                <div style="text-align: right; font-size: 7px; font-weight: 700; color: #94a3b8;">
+                    ALLEZ, FAITES DE TOUTES LES NATIONS DES DISCIPLES
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Badge info non imprimable -->
+        <div class="no-print" style="margin-top: 10px; text-align: center; font-size: 9px; font-weight: 600; color: #475569; background: white; padding: 5px 14px; border-radius: 30px; width: fit-content; margin-left: auto; margin-right: auto; box-shadow: 0 1px 3px rgba(0,0,0,0.05);">
+            📄 FORMAT A4 PAYSAGE — 1 PAGE — RESPONSIVE
+        </div>
+
+    </div>
+
+</body>
+</html>

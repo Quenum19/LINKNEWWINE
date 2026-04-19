@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QR Code New Wine Church</title>
+  <script src="https://cdn.rawgit.com/davidshimjs/qrcodejs/gh-pages/qrcode.min.js"></script>
+</head>
+<body>
+  <div id="qrcode"></div>
+
+  <script>
+    // Créer le QR code qui redirige vers l'URL de ton site Vercel
+    var qrcode = new QRCode(document.getElementById("qrcode"), {
+      text: "https://qr-code-rs-nw.vercel.app/", // Remplace avec ton URL de site Vercel
+      width: 128,
+      height: 128
+    });
+  </script>
+</body>
+</html>

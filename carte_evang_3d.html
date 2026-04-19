@@ -1,0 +1,581 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>pydeck</title>
+        <script src="https://api.tiles.mapbox.com/mapbox-gl-js/v1.13.0/mapbox-gl.js"></script>
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <script src='https://cdn.jsdelivr.net/npm/@deck.gl/jupyter-widget@~9.0.*/dist/index.js'></script>
+    <style>
+    body {
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+#deck-container {
+  width: 100vw;
+  height: 100vh;
+}
+
+#deck-container canvas {
+  z-index: 1;
+  background: none;
+}
+    </style>
+  </head>
+  <body>
+    <div id="deck-container">
+    </div>
+  </body>
+  <script>
+    const container = document.getElementById('deck-container');
+    const jsonInput = {
+  "initialViewState": {
+    "bearing": 0,
+    "height": 600,
+    "latitude": 5.361824523656798,
+    "longitude": -3.967683740514682,
+    "pitch": 45,
+    "zoom": 12
+  },
+  "layers": [
+    {
+      "@@type": "ColumnLayer",
+      "autoHighlight": true,
+      "data": [
+        {
+          "couleur": [
+            255,
+            0,
+            0
+          ],
+          "elevation": 100,
+          "latitude": 5.361824523656798,
+          "longitude": -3.967683740514682,
+          "nom": "\u00c9glise Maison de la Destin\u00e9e",
+          "type": "eglise"
+        }
+      ],
+      "elevationScale": 20,
+      "getElevation": "@@=elevation",
+      "getFillColor": "@@=couleur",
+      "getPosition": "@@=[longitude, latitude]",
+      "id": "67bc0bf5-902d-4f5b-a482-388fe1e6b5a1",
+      "pickable": true,
+      "radius": 100
+    },
+    {
+      "@@type": "ColumnLayer",
+      "autoHighlight": true,
+      "data": [
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.370240505960099,
+          "longitude": -3.9556296011142025,
+          "nom": "Riviera Palmeraie",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.3665315617355045,
+          "longitude": -3.9731195924616354,
+          "nom": "Bonoumin",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.345691948843627,
+          "longitude": -3.9795333438627223,
+          "nom": "Riviera 2",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.355229376399118,
+          "longitude": -3.953351632226753,
+          "nom": "Riviera 3",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.370622989614985,
+          "longitude": -3.9820987066853575,
+          "nom": "Attoban",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.361325409399416,
+          "longitude": -3.941685495112414,
+          "nom": "Riviera Triangle",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            0,
+            0,
+            255
+          ],
+          "elevation": 50,
+          "latitude": 5.3428098032171505,
+          "longitude": -3.969852810231434,
+          "nom": "Anono",
+          "type": "J\u00e9rusalem"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.3293808119348265,
+          "longitude": -3.9520930607035063,
+          "nom": "Riviera Ciad",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.351136140798523,
+          "longitude": -3.940897920756014,
+          "nom": "Akouedo",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.365882248951378,
+          "longitude": -3.9307081605714673,
+          "nom": "Faya",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.326019182740508,
+          "longitude": -3.9157373744692827,
+          "nom": "Abatta",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.403654751526298,
+          "longitude": -3.940281685735934,
+          "nom": "Cit\u00e9 SIR Djorogobit\u00e9",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.345855773738112,
+          "longitude": -3.9493194049716225,
+          "nom": "SINACASSY",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.3738495146807805,
+          "longitude": -3.911789046618327,
+          "nom": "Bingerville",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.40129441289972,
+          "longitude": -3.9575031512286167,
+          "nom": "Angr\u00e9 Nouveau CHU",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.400122425116737,
+          "longitude": -3.973524589628824,
+          "nom": "Angr\u00e9 8\u00e8me tranche",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.393877571118014,
+          "longitude": -3.987804400747161,
+          "nom": "Angr\u00e9 7\u00e8me tranche",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.36191866602764,
+          "longitude": -3.9899855609538553,
+          "nom": "Vallon",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.340959389928841,
+          "longitude": -3.9845981408100424,
+          "nom": "Universit\u00e9 FHB Abidjan",
+          "type": "Jud\u00e9e"
+        },
+        {
+          "couleur": [
+            255,
+            165,
+            0
+          ],
+          "elevation": 50,
+          "latitude": 5.344282670390227,
+          "longitude": -3.9934295204307104,
+          "nom": "Mermoz",
+          "type": "Jud\u00e9e"
+        }
+      ],
+      "elevationScale": 20,
+      "getElevation": "@@=elevation",
+      "getFillColor": "@@=couleur",
+      "getPosition": "@@=[longitude, latitude]",
+      "id": "c6dec97e-1951-4acb-b509-8a97a32ac770",
+      "pickable": true,
+      "radius": 60
+    },
+    {
+      "@@type": "LineLayer",
+      "data": [
+        {
+          "nom": "Riviera Palmeraie",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9556296011142025,
+            5.370240505960099
+          ]
+        },
+        {
+          "nom": "Bonoumin",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9731195924616354,
+            5.3665315617355045
+          ]
+        },
+        {
+          "nom": "Riviera 2",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9795333438627223,
+            5.345691948843627
+          ]
+        },
+        {
+          "nom": "Riviera 3",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.953351632226753,
+            5.355229376399118
+          ]
+        },
+        {
+          "nom": "Attoban",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9820987066853575,
+            5.370622989614985
+          ]
+        },
+        {
+          "nom": "Riviera Triangle",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.941685495112414,
+            5.361325409399416
+          ]
+        },
+        {
+          "nom": "Anono",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.969852810231434,
+            5.3428098032171505
+          ]
+        },
+        {
+          "nom": "Riviera Ciad",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9520930607035063,
+            5.3293808119348265
+          ]
+        },
+        {
+          "nom": "Akouedo",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.940897920756014,
+            5.351136140798523
+          ]
+        },
+        {
+          "nom": "Faya",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9307081605714673,
+            5.365882248951378
+          ]
+        },
+        {
+          "nom": "Abatta",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9157373744692827,
+            5.326019182740508
+          ]
+        },
+        {
+          "nom": "Cit\u00e9 SIR Djorogobit\u00e9",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.940281685735934,
+            5.403654751526298
+          ]
+        },
+        {
+          "nom": "SINACASSY",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9493194049716225,
+            5.345855773738112
+          ]
+        },
+        {
+          "nom": "Bingerville",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.911789046618327,
+            5.3738495146807805
+          ]
+        },
+        {
+          "nom": "Angr\u00e9 Nouveau CHU",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9575031512286167,
+            5.40129441289972
+          ]
+        },
+        {
+          "nom": "Angr\u00e9 8\u00e8me tranche",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.973524589628824,
+            5.400122425116737
+          ]
+        },
+        {
+          "nom": "Angr\u00e9 7\u00e8me tranche",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.987804400747161,
+            5.393877571118014
+          ]
+        },
+        {
+          "nom": "Vallon",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9899855609538553,
+            5.36191866602764
+          ]
+        },
+        {
+          "nom": "Universit\u00e9 FHB Abidjan",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9845981408100424,
+            5.340959389928841
+          ]
+        },
+        {
+          "nom": "Mermoz",
+          "source": [
+            -3.967683740514682,
+            5.361824523656798
+          ],
+          "target": [
+            -3.9934295204307104,
+            5.344282670390227
+          ]
+        }
+      ],
+      "getColor": [
+        100,
+        100,
+        100,
+        160
+      ],
+      "getSourcePosition": "@@=source",
+      "getTargetPosition": "@@=target",
+      "getWidth": 2,
+      "id": "d22e8b27-70cb-4faf-93f6-4f270e36b8b5",
+      "pickable": true
+    }
+  ],
+  "mapProvider": "carto",
+  "mapStyle": "https://basemaps.cartocdn.com/gl/positron-gl-style/style.json",
+  "views": [
+    {
+      "@@type": "MapView",
+      "controller": true
+    }
+  ]
+};
+    const tooltip = {'html': '<b>{nom}</b><br>{type}', 'style': {'color': 'white'}};
+    const customLibraries = null;
+    const configuration = null;
+
+    const deckInstance = createDeck({
+                  container,
+      jsonInput,
+      tooltip,
+      customLibraries,
+      configuration
+    });
+
+  </script>
+</html>

@@ -1,0 +1,2141 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_4ca40ea0faa133aae61423deb0b0d30b {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+
+            <style>html, body {
+                width: 100%;
+                height: 100%;
+                margin: 0;
+                padding: 0;
+            }
+            </style>
+
+            <style>#map {
+                position:absolute;
+                top:0;
+                bottom:0;
+                right:0;
+                left:0;
+                }
+            </style>
+
+            <script>
+                L_NO_TOUCH = false;
+                L_DISABLE_3D = false;
+            </script>
+
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-minimap/3.6.1/Control.MiniMap.css"/>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet.fullscreen@3.0.0/Control.FullScreen.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ljagis/leaflet-measure@2.1.7/dist/leaflet-measure.min.css"/>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet-locatecontrol/0.66.2/L.Control.Locate.min.css"/>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css"/>
+    <script src="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/ardhi/Leaflet.MousePosition/src/L.Control.MousePosition.min.css"/>
+</head>
+<body>
+    
+    
+    <div style="
+        position: fixed;
+        bottom: 20px; left: 20px;
+        background: white;
+        padding: 12px;
+        border: 2px solid grey;
+        border-radius: 8px;
+        z-index: 1000;
+        font-size: 12px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.2);
+        max-width: 240px;
+    ">
+    <h4 style="margin: 0 0 8px 0; color: #2c3e50; border-bottom: 1px solid #eee; padding-bottom: 5px;">🗺️ LÉGENDE</h4>
+
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <span style="color: red; font-size: 16px; margin-right: 8px;">⛪</span>
+        <span>Église Maison de la Destinée</span>
+    </div>
+
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <div style="background: blue; opacity: 0.3; width: 16px; height: 16px; border: 2px solid blue; margin-right: 8px;"></div>
+        <span>Zone Jérusalem (7 quartiers)</span>
+    </div>
+
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <div style="background: orange; opacity: 0.3; width: 16px; height: 16px; border: 2px solid orange; margin-right: 8px;"></div>
+        <span>Zone Judée (13 quartiers)</span>
+    </div>
+
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <span style="color: darkblue; font-size: 14px; margin-right: 8px;">🏠</span>
+        <span>Quartier Jérusalem</span>
+    </div>
+
+    <div style="display: flex; align-items: center; margin: 5px 0;">
+        <span style="color: darkorange; font-size: 14px; margin-right: 8px;">🏢</span>
+        <span>Quartier Judée</span>
+    </div>
+
+    <div style="margin-top: 8px; padding-top: 8px; border-top: 1px solid #ddd;">
+        <small><i>🚗 Itinéraires depuis l'église vers chaque quartier</i></small>
+    </div>
+    </div>
+    
+    
+            <div class="folium-map" id="map_4ca40ea0faa133aae61423deb0b0d30b" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_4ca40ea0faa133aae61423deb0b0d30b = L.map(
+                "map_4ca40ea0faa133aae61423deb0b0d30b",
+                {
+                    center: [5.362500460889443, -3.959553663801646],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+            L.control.scale().addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+
+            
+
+        
+    
+            var tile_layer_55f0417c0228e44aadcc9b596a552994 = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 19,
+  "maxNativeZoom": 19,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abc",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_55f0417c0228e44aadcc9b596a552994.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var tile_layer_bea5c97a01e5a85fafc0b9523b042dde = L.tileLayer(
+                "https://tile.openstreetmap.org/{z}/{x}/{y}.png",
+                {"attribution": "\u0026copy; \u003ca href=\"https://www.openstreetmap.org/copyright\"\u003eOpenStreetMap\u003c/a\u003e contributors", "detect_retina": false, "max_native_zoom": 19, "max_zoom": 19, "min_zoom": 0, "no_wrap": false, "opacity": 1, "subdomains": "abc", "tms": false}
+            );
+            var mini_map_4181aeedd5779530045fddf2d7aee8b6 = new L.Control.MiniMap(
+                tile_layer_bea5c97a01e5a85fafc0b9523b042dde,
+                {
+  "position": "bottomright",
+  "width": 150,
+  "height": 150,
+  "collapsedWidth": 25,
+  "collapsedHeight": 25,
+  "zoomLevelOffset": -5,
+  "centerFixed": false,
+  "zoomAnimation": false,
+  "toggleDisplay": true,
+  "autoToggleDisplay": false,
+  "minimized": false,
+}
+            );
+            map_4ca40ea0faa133aae61423deb0b0d30b.addControl(mini_map_4181aeedd5779530045fddf2d7aee8b6);
+        
+    
+            L.control.fullscreen(
+                {
+  "position": "topright",
+  "title": "Full Screen",
+  "titleCancel": "Exit Full Screen",
+  "forceSeparateButton": false,
+}
+            ).addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var measure_control_4eed697ab24f958b02e03667a1b954fa = new L.Control.Measure(
+                {
+  "position": "bottomleft",
+  "primaryLengthUnit": "meters",
+  "secondaryLengthUnit": "kilometers",
+  "primaryAreaUnit": "sqmeters",
+  "secondaryAreaUnit": "acres",
+});
+            map_4ca40ea0faa133aae61423deb0b0d30b.addControl(measure_control_4eed697ab24f958b02e03667a1b954fa);
+
+            // Workaround for using this plugin with Leaflet>=1.8.0
+            // https://github.com/ljagis/leaflet-measure/issues/171
+            L.Control.Measure.include({
+                _setCaptureMarkerIcon: function () {
+                    // disable autopan
+                    this._captureMarker.options.autoPanOnFocus = false;
+                    // default function
+                    this._captureMarker.setIcon(
+                        L.divIcon({
+                            iconSize: this._map.getSize().multiplyBy(2)
+                        })
+                    );
+                },
+            });
+
+        
+    
+            var locate_control_8a7440366584880ad8e3831484787ade = L.control.locate(
+                {"position": "topright", "strings": {"title": "Me localiser"}}
+            ).addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+            
+        
+    
+
+            var geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4 = {
+  "collapsed": true,
+  "position": "topleft",
+  "defaultMarkGeocode": true,
+  "zoom": 11,
+  "provider": "nominatim",
+  "providerOptions": {
+},
+};
+
+            // note: geocoder name should start with lowercase
+            var geocoderName_geocoder_c643e1fa8bab0f5454600a31084769d4 = geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4["provider"];
+
+            var customGeocoder_geocoder_c643e1fa8bab0f5454600a31084769d4 = L.Control.Geocoder[ geocoderName_geocoder_c643e1fa8bab0f5454600a31084769d4 ](
+                geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4['providerOptions']
+            );
+            geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4["geocoder"] = customGeocoder_geocoder_c643e1fa8bab0f5454600a31084769d4;
+
+            L.Control.geocoder(
+                geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4
+            ).on('markgeocode', function(e) {
+                var zoom = geocoderOpts_geocoder_c643e1fa8bab0f5454600a31084769d4['zoom'] || map_4ca40ea0faa133aae61423deb0b0d30b.getZoom();
+                map_4ca40ea0faa133aae61423deb0b0d30b.setView(e.geocode.center, zoom);
+            }).addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+
+        
+    
+            var mouse_position_a2f3635ddada355955aad17557eff0e9 = new L.Control.MousePosition(
+                {
+  "position": "bottomleft",
+  "separator": " | ",
+  "emptyString": "Unavailable",
+  "lngFirst": false,
+  "numDigits": 5,
+  "prefix": "Position:",
+}
+            );
+            mouse_position_a2f3635ddada355955aad17557eff0e9.options["latFormatter"] =
+                function(num) {return num.toFixed(6);};
+            mouse_position_a2f3635ddada355955aad17557eff0e9.options["lngFormatter"] =
+                function(num) {return num.toFixed(6);};
+            map_4ca40ea0faa133aae61423deb0b0d30b.addControl(mouse_position_a2f3635ddada355955aad17557eff0e9);
+        
+    
+            var feature_group_b1377c8456713a528cc9ad30780349a4 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var polygon_c5c05a115fe3a7b2514992a09bbcef63 = L.polygon(
+                [[5.389482135590424, -3.965038740242074], [5.389017853243301, -3.95970867196165], [5.387639113186109, -3.9545405551087813], [5.385387807737812, -3.9496914202988505], [5.38233234167524, -3.9453086060392755], [5.3785655537885635, -3.9415252819235227], [5.374201896021633, -3.938456402340395], [5.369373955907579, -3.9361952136430984], [5.364228427963712, -3.9348104209059827], [5.358921656452843, -3.9343441003556263], [5.353614884941973, -3.9348104209059827], [5.348469356998106, -3.9361952136430984], [5.3436414168840525, -3.938456402340395], [5.339277759117122, -3.9415252819235227], [5.335510971230446, -3.9453086060392755], [5.332455505167873, -3.9496914202988505], [5.330204199719576, -3.9545405551087813], [5.328825459662385, -3.95970867196165], [5.328361177315261, -3.965038740242074], [5.328825459662385, -3.9703688085224984], [5.330204199719576, -3.975536925375367], [5.332455505167873, -3.980386060185298], [5.335510971230446, -3.984768874444873], [5.339277759117122, -3.9885521985606256], [5.3436414168840525, -3.991621078143753], [5.348469356998106, -3.99388226684105], [5.353614884941973, -3.9952670595781656], [5.358921656452843, -3.995733380128522], [5.364228427963712, -3.9952670595781656], [5.369373955907579, -3.99388226684105], [5.374201896021633, -3.991621078143753], [5.3785655537885635, -3.9885521985606256], [5.38233234167524, -3.984768874444873], [5.385387807737812, -3.980386060185298], [5.387639113186109, -3.975536925375367], [5.389017853243301, -3.9703688085224984], [5.389482135590424, -3.965038740242074]],
+                {"bubblingMouseEvents": true, "color": "blue", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "blue", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b1377c8456713a528cc9ad30780349a4);
+        
+    
+        var popup_303c674080050ac357185ad4137ffc27 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_454e8841d4627be71e8ee296b2c7aaa9 = $(`<div id="html_454e8841d4627be71e8ee296b2c7aaa9" style="width: 100.0%; height: 100.0%;">         <div style="min-width: 220px">             <h4 style="color: blue; margin: 0;">🔵 Zone Jérusalem</h4>             <p><b>7 quartiers</b></p>             <ul style="padding-left: 15px; margin: 5px 0; font-size: 12px;">                 <li>Riviera Palmeraie</li>                 <li>Bonoumin</li>                 <li>Riviera 2</li>                 <li>Riviera 3</li>                 <li>Attoban</li>                 <li>Riviera Triangle</li>                 <li>Anono</li>             </ul>         </div>         </div>`)[0];
+                popup_303c674080050ac357185ad4137ffc27.setContent(html_454e8841d4627be71e8ee296b2c7aaa9);
+            
+        
+
+        polygon_c5c05a115fe3a7b2514992a09bbcef63.bindPopup(popup_303c674080050ac357185ad4137ffc27)
+        ;
+
+        
+    
+    
+            polygon_c5c05a115fe3a7b2514992a09bbcef63.bindTooltip(
+                `<div>
+                     Jérusalem - 7 quartiers
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var polygon_9dceee4a73731dddb507b585b3c49ad1 = L.polygon(
+                [[5.430619650413788, -3.9559747705865664], [5.429614832982836, -3.9444391300250152], [5.42663091155916, -3.9332539940646107], [5.421758551085279, -3.922759217401558], [5.41514579576866, -3.9132736785141513], [5.406993570833381, -3.9050855907015696], [5.397549577508879, -3.8984437448686258], [5.3871007667534245, -3.893549950140018], [5.37596462039447, -3.890552901992195], [5.3644795046039695, -3.8895436642165495], [5.352994388813469, -3.890552901992195], [5.3418582424545145, -3.893549950140018], [5.33140943169906, -3.8984437448686258], [5.321965438374558, -3.9050855907015696], [5.313813213439279, -3.9132736785141513], [5.30720045812266, -3.922759217401558], [5.302328097648779, -3.9332539940646107], [5.299344176225103, -3.9444391300250152], [5.298339358794151, -3.9559747705865664], [5.299344176225103, -3.9675104111481176], [5.302328097648779, -3.978695547108522], [5.30720045812266, -3.9891903237715747], [5.313813213439279, -3.9986758626589816], [5.321965438374558, -4.006863950471564], [5.33140943169906, -4.013505796304507], [5.3418582424545145, -4.0183995910331145], [5.352994388813469, -4.021396639180938], [5.3644795046039695, -4.022405876956583], [5.37596462039447, -4.021396639180938], [5.3871007667534245, -4.0183995910331145], [5.397549577508879, -4.013505796304507], [5.406993570833381, -4.006863950471564], [5.41514579576866, -3.9986758626589816], [5.421758551085279, -3.9891903237715747], [5.42663091155916, -3.978695547108522], [5.429614832982836, -3.9675104111481176], [5.430619650413788, -3.9559747705865664]],
+                {"bubblingMouseEvents": true, "color": "orange", "dashArray": null, "dashOffset": null, "fill": true, "fillColor": "orange", "fillOpacity": 0.15, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 1.0, "smoothFactor": 1.0, "stroke": true, "weight": 3}
+            ).addTo(feature_group_b1377c8456713a528cc9ad30780349a4);
+        
+    
+        var popup_dd8ba5a32a15457a02198fafca039c96 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0958ef76988581e0d260da00389a3f1e = $(`<div id="html_0958ef76988581e0d260da00389a3f1e" style="width: 100.0%; height: 100.0%;">         <div style="min-width: 220px">             <h4 style="color: orange; margin: 0;">🟠 Zone Judée</h4>             <p><b>13 quartiers</b></p>             <ul style="padding-left: 15px; margin: 5px 0; font-size: 12px;">                 <li>Riviera Ciad</li>                 <li>Akouedo</li>                 <li>Faya</li>                 <li>Abatta</li>                 <li>Cité SIR Djorogobité</li>                 <li>SINACASSY</li>                 <li>Entrée de Bingerville</li>                 <li>Angré Nouveau CHU</li>                 <li>Angré 8ème tranche</li>                 <li>Angré 7ème tranche</li>                 <li>Vallon</li>                 <li>Université FHB Abidjan</li>                 <li>Mermoz</li>             </ul>         </div>         </div>`)[0];
+                popup_dd8ba5a32a15457a02198fafca039c96.setContent(html_0958ef76988581e0d260da00389a3f1e);
+            
+        
+
+        polygon_9dceee4a73731dddb507b585b3c49ad1.bindPopup(popup_dd8ba5a32a15457a02198fafca039c96)
+        ;
+
+        
+    
+    
+            polygon_9dceee4a73731dddb507b585b3c49ad1.bindTooltip(
+                `<div>
+                     Judée - 13 quartiers
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_b1377c8456713a528cc9ad30780349a4.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var feature_group_9ca595aed986f1f9587d6aaf7f4d8e9b = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_624dfb1628a9d3a804f126d822b1b02c = L.marker(
+                [5.361824523656798, -3.967683740514682],
+                {
+}
+            ).addTo(feature_group_9ca595aed986f1f9587d6aaf7f4d8e9b);
+        
+    
+            var icon_bb205d0ca2f3f260935591e14cf2a13f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "cross",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_0e609799d39c5aee670e61a72e02ad77 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_bacc7235e9b585b5f37ff8d80bbe5c37 = $(`<div id="html_bacc7235e9b585b5f37ff8d80bbe5c37" style="width: 100.0%; height: 100.0%;">         <div style="min-width: 220px">             <h4 style="color: red; margin: 0;">🏛️ Église Maison de la Destinée</h4>             <p><b>Point central de départ</b></p>             <p><b>Coordonnées exactes:</b></p>             <p>Lat: 5.361825<br>Lon: -3.967684</p>         </div>         </div>`)[0];
+                popup_0e609799d39c5aee670e61a72e02ad77.setContent(html_bacc7235e9b585b5f37ff8d80bbe5c37);
+            
+        
+
+        marker_624dfb1628a9d3a804f126d822b1b02c.bindPopup(popup_0e609799d39c5aee670e61a72e02ad77)
+        ;
+
+        
+    
+    
+            marker_624dfb1628a9d3a804f126d822b1b02c.bindTooltip(
+                `<div>
+                     🏛️ Église - Point de départ
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_624dfb1628a9d3a804f126d822b1b02c.setIcon(icon_bb205d0ca2f3f260935591e14cf2a13f);
+            
+    
+            feature_group_9ca595aed986f1f9587d6aaf7f4d8e9b.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var feature_group_09a934ef4c3d03909727ecea0160c60e = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var marker_5344009ecb99d7b3a5e88bd69087b71a = L.marker(
+                [5.370240505960099, -3.9556296011142025],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_146869d455829bcabc222a4b76af17f9 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_98eb1e495f918d2d7d3883c2ef8c2505 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_3d56bdc07d35c0c839f057a761d05d31 = $(`<div id="html_3d56bdc07d35c0c839f057a761d05d31" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Riviera Palmeraie</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.370241<br>Lon: -3.955630</p>                 </div>                 </div>`)[0];
+                popup_98eb1e495f918d2d7d3883c2ef8c2505.setContent(html_3d56bdc07d35c0c839f057a761d05d31);
+            
+        
+
+        marker_5344009ecb99d7b3a5e88bd69087b71a.bindPopup(popup_98eb1e495f918d2d7d3883c2ef8c2505)
+        ;
+
+        
+    
+    
+            marker_5344009ecb99d7b3a5e88bd69087b71a.bindTooltip(
+                `<div>
+                     🏘️ Riviera Palmeraie (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5344009ecb99d7b3a5e88bd69087b71a.setIcon(icon_146869d455829bcabc222a4b76af17f9);
+            
+    
+            var marker_299ba7d82d51aa316cf73074b3539037 = L.marker(
+                [5.3665315617355045, -3.9731195924616354],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_bcf52facc82e14e0dd94736f4d400b7d = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b11ada24971acc10f679e2dab2359cb7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_970160d13e59962695a40a1216670d75 = $(`<div id="html_970160d13e59962695a40a1216670d75" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Bonoumin</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.366532<br>Lon: -3.973120</p>                 </div>                 </div>`)[0];
+                popup_b11ada24971acc10f679e2dab2359cb7.setContent(html_970160d13e59962695a40a1216670d75);
+            
+        
+
+        marker_299ba7d82d51aa316cf73074b3539037.bindPopup(popup_b11ada24971acc10f679e2dab2359cb7)
+        ;
+
+        
+    
+    
+            marker_299ba7d82d51aa316cf73074b3539037.bindTooltip(
+                `<div>
+                     🏘️ Bonoumin (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_299ba7d82d51aa316cf73074b3539037.setIcon(icon_bcf52facc82e14e0dd94736f4d400b7d);
+            
+    
+            var marker_4b176dd7aaa86a31f9dc1c2efba1aaca = L.marker(
+                [5.345691948843627, -3.9795333438627223],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_27efdad3bdc1aa22d87270a07b5f2b43 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_648626d76985d987b2379bd6d764db48 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_cb0f3727e277c6f6dcbdb3088cc93dd8 = $(`<div id="html_cb0f3727e277c6f6dcbdb3088cc93dd8" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Riviera 2</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.345692<br>Lon: -3.979533</p>                 </div>                 </div>`)[0];
+                popup_648626d76985d987b2379bd6d764db48.setContent(html_cb0f3727e277c6f6dcbdb3088cc93dd8);
+            
+        
+
+        marker_4b176dd7aaa86a31f9dc1c2efba1aaca.bindPopup(popup_648626d76985d987b2379bd6d764db48)
+        ;
+
+        
+    
+    
+            marker_4b176dd7aaa86a31f9dc1c2efba1aaca.bindTooltip(
+                `<div>
+                     🏘️ Riviera 2 (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_4b176dd7aaa86a31f9dc1c2efba1aaca.setIcon(icon_27efdad3bdc1aa22d87270a07b5f2b43);
+            
+    
+            var marker_7def39aac42b66469db395192419e46f = L.marker(
+                [5.355229376399118, -3.953351632226753],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_9a122d270a6131baa8238ca250f24d13 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_be57976c7e5c036c18ed1cff41ff6d44 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_49921247b4dc056d7a9fcb511e6509c9 = $(`<div id="html_49921247b4dc056d7a9fcb511e6509c9" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Riviera 3</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.355229<br>Lon: -3.953352</p>                 </div>                 </div>`)[0];
+                popup_be57976c7e5c036c18ed1cff41ff6d44.setContent(html_49921247b4dc056d7a9fcb511e6509c9);
+            
+        
+
+        marker_7def39aac42b66469db395192419e46f.bindPopup(popup_be57976c7e5c036c18ed1cff41ff6d44)
+        ;
+
+        
+    
+    
+            marker_7def39aac42b66469db395192419e46f.bindTooltip(
+                `<div>
+                     🏘️ Riviera 3 (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7def39aac42b66469db395192419e46f.setIcon(icon_9a122d270a6131baa8238ca250f24d13);
+            
+    
+            var marker_ea7bcabb3ed947ed073cd7eac0134168 = L.marker(
+                [5.370622989614985, -3.9820987066853575],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_07bd54977874e970b33fb43872a67147 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5534b0fa5551dd2cafd075326874548f = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4ac9243dfe447edc48961492ff6261f7 = $(`<div id="html_4ac9243dfe447edc48961492ff6261f7" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Attoban</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.370623<br>Lon: -3.982099</p>                 </div>                 </div>`)[0];
+                popup_5534b0fa5551dd2cafd075326874548f.setContent(html_4ac9243dfe447edc48961492ff6261f7);
+            
+        
+
+        marker_ea7bcabb3ed947ed073cd7eac0134168.bindPopup(popup_5534b0fa5551dd2cafd075326874548f)
+        ;
+
+        
+    
+    
+            marker_ea7bcabb3ed947ed073cd7eac0134168.bindTooltip(
+                `<div>
+                     🏘️ Attoban (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_ea7bcabb3ed947ed073cd7eac0134168.setIcon(icon_07bd54977874e970b33fb43872a67147);
+            
+    
+            var marker_b0c12abea6784a8bd5216b2489317592 = L.marker(
+                [5.361325409399416, -3.941685495112414],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_1a5f9b11ca51eedd764ceab39807ba3a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_34b03f90eefeab8e6d8510e4dc5752b4 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7b71434857f7726a37ba0b68ee3cd977 = $(`<div id="html_7b71434857f7726a37ba0b68ee3cd977" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Riviera Triangle</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.361325<br>Lon: -3.941685</p>                 </div>                 </div>`)[0];
+                popup_34b03f90eefeab8e6d8510e4dc5752b4.setContent(html_7b71434857f7726a37ba0b68ee3cd977);
+            
+        
+
+        marker_b0c12abea6784a8bd5216b2489317592.bindPopup(popup_34b03f90eefeab8e6d8510e4dc5752b4)
+        ;
+
+        
+    
+    
+            marker_b0c12abea6784a8bd5216b2489317592.bindTooltip(
+                `<div>
+                     🏘️ Riviera Triangle (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_b0c12abea6784a8bd5216b2489317592.setIcon(icon_1a5f9b11ca51eedd764ceab39807ba3a);
+            
+    
+            var marker_a96edc6a730d3f2fca037ade16329712 = L.marker(
+                [5.3428098032171505, -3.969852810231434],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_ea6c9aa3b8d7d979fec6529eb5e027cd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkblue",
+  "iconColor": "white",
+  "icon": "home",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_5c31865d5f55f3501f324c38709e98c7 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d806310903d662fd5a64adc0c3e39248 = $(`<div id="html_d806310903d662fd5a64adc0c3e39248" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkblue; margin: 0;">🏘️ Anono</h4>                     <p><b>Zone:</b> Jérusalem</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.342810<br>Lon: -3.969853</p>                 </div>                 </div>`)[0];
+                popup_5c31865d5f55f3501f324c38709e98c7.setContent(html_d806310903d662fd5a64adc0c3e39248);
+            
+        
+
+        marker_a96edc6a730d3f2fca037ade16329712.bindPopup(popup_5c31865d5f55f3501f324c38709e98c7)
+        ;
+
+        
+    
+    
+            marker_a96edc6a730d3f2fca037ade16329712.bindTooltip(
+                `<div>
+                     🏘️ Anono (Jérusalem)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_a96edc6a730d3f2fca037ade16329712.setIcon(icon_ea6c9aa3b8d7d979fec6529eb5e027cd);
+            
+    
+            var marker_c2520a47375227fa8dfec78dd0890106 = L.marker(
+                [5.3293808119348265, -3.9520930607035063],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_90c8e1c0fe79a6a2e7c3bb467dfd7ee2 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_af415f5f90ea585ffc47ba8cfc44f9be = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b0ba8c1ee4b147e1877497325e0b6fa4 = $(`<div id="html_b0ba8c1ee4b147e1877497325e0b6fa4" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Riviera Ciad</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.329381<br>Lon: -3.952093</p>                 </div>                 </div>`)[0];
+                popup_af415f5f90ea585ffc47ba8cfc44f9be.setContent(html_b0ba8c1ee4b147e1877497325e0b6fa4);
+            
+        
+
+        marker_c2520a47375227fa8dfec78dd0890106.bindPopup(popup_af415f5f90ea585ffc47ba8cfc44f9be)
+        ;
+
+        
+    
+    
+            marker_c2520a47375227fa8dfec78dd0890106.bindTooltip(
+                `<div>
+                     🏘️ Riviera Ciad (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_c2520a47375227fa8dfec78dd0890106.setIcon(icon_90c8e1c0fe79a6a2e7c3bb467dfd7ee2);
+            
+    
+            var marker_3d1a2b06672dea393e8def2c7f7f61b9 = L.marker(
+                [5.351136140798523, -3.940897920756014],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_d76278ba0655be3b2fd4bf3ce3f94ad6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_d0f3b633d1e97cb2973b6a7b58669953 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a769434444312800b973222c9a8d1751 = $(`<div id="html_a769434444312800b973222c9a8d1751" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Akouedo</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.351136<br>Lon: -3.940898</p>                 </div>                 </div>`)[0];
+                popup_d0f3b633d1e97cb2973b6a7b58669953.setContent(html_a769434444312800b973222c9a8d1751);
+            
+        
+
+        marker_3d1a2b06672dea393e8def2c7f7f61b9.bindPopup(popup_d0f3b633d1e97cb2973b6a7b58669953)
+        ;
+
+        
+    
+    
+            marker_3d1a2b06672dea393e8def2c7f7f61b9.bindTooltip(
+                `<div>
+                     🏘️ Akouedo (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3d1a2b06672dea393e8def2c7f7f61b9.setIcon(icon_d76278ba0655be3b2fd4bf3ce3f94ad6);
+            
+    
+            var marker_0eb11947bb35b09ca074c96d9aafe4a8 = L.marker(
+                [5.365882248951378, -3.9307081605714673],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_71680e8f4aa56a902dfbf19905757377 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_58fb5e59dbc281c18cc20ba011fd7c94 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a8de57de51c850dbba9aa27b5bc90b39 = $(`<div id="html_a8de57de51c850dbba9aa27b5bc90b39" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Faya</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.365882<br>Lon: -3.930708</p>                 </div>                 </div>`)[0];
+                popup_58fb5e59dbc281c18cc20ba011fd7c94.setContent(html_a8de57de51c850dbba9aa27b5bc90b39);
+            
+        
+
+        marker_0eb11947bb35b09ca074c96d9aafe4a8.bindPopup(popup_58fb5e59dbc281c18cc20ba011fd7c94)
+        ;
+
+        
+    
+    
+            marker_0eb11947bb35b09ca074c96d9aafe4a8.bindTooltip(
+                `<div>
+                     🏘️ Faya (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_0eb11947bb35b09ca074c96d9aafe4a8.setIcon(icon_71680e8f4aa56a902dfbf19905757377);
+            
+    
+            var marker_7c2bde7e7386d26143918ed76c44b9fc = L.marker(
+                [5.326019182740508, -3.9157373744692827],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_90183ab81bcfdba1c53d0cc8d08f9001 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_015f35990bb55c6fc4e4ee69b808fe1a = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_503857ebcc97527db3f61957841e96df = $(`<div id="html_503857ebcc97527db3f61957841e96df" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Abatta</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.326019<br>Lon: -3.915737</p>                 </div>                 </div>`)[0];
+                popup_015f35990bb55c6fc4e4ee69b808fe1a.setContent(html_503857ebcc97527db3f61957841e96df);
+            
+        
+
+        marker_7c2bde7e7386d26143918ed76c44b9fc.bindPopup(popup_015f35990bb55c6fc4e4ee69b808fe1a)
+        ;
+
+        
+    
+    
+            marker_7c2bde7e7386d26143918ed76c44b9fc.bindTooltip(
+                `<div>
+                     🏘️ Abatta (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_7c2bde7e7386d26143918ed76c44b9fc.setIcon(icon_90183ab81bcfdba1c53d0cc8d08f9001);
+            
+    
+            var marker_df22633c69a18b65533f1bbb7cfd7140 = L.marker(
+                [5.403654751526298, -3.940281685735934],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_b9ff6e14bab67561830b9e0fbd2cfe78 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_69a559d7e1e6995d913842c5a67bd635 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_1d6881a8bb929594391198f7a4f4f447 = $(`<div id="html_1d6881a8bb929594391198f7a4f4f447" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Cité SIR Djorogobité</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.403655<br>Lon: -3.940282</p>                 </div>                 </div>`)[0];
+                popup_69a559d7e1e6995d913842c5a67bd635.setContent(html_1d6881a8bb929594391198f7a4f4f447);
+            
+        
+
+        marker_df22633c69a18b65533f1bbb7cfd7140.bindPopup(popup_69a559d7e1e6995d913842c5a67bd635)
+        ;
+
+        
+    
+    
+            marker_df22633c69a18b65533f1bbb7cfd7140.bindTooltip(
+                `<div>
+                     🏘️ Cité SIR Djorogobité (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_df22633c69a18b65533f1bbb7cfd7140.setIcon(icon_b9ff6e14bab67561830b9e0fbd2cfe78);
+            
+    
+            var marker_485b0820c30c7ff6b8724977cde9b095 = L.marker(
+                [5.345855773738112, -3.9493194049716225],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_9d3dd54b35506a402b6c7f0638b270bf = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_dce564c736ed8c698dc937e5eb762898 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0a539dd30d440a6c5938363ad82ef478 = $(`<div id="html_0a539dd30d440a6c5938363ad82ef478" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ SINACASSY</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.345856<br>Lon: -3.949319</p>                 </div>                 </div>`)[0];
+                popup_dce564c736ed8c698dc937e5eb762898.setContent(html_0a539dd30d440a6c5938363ad82ef478);
+            
+        
+
+        marker_485b0820c30c7ff6b8724977cde9b095.bindPopup(popup_dce564c736ed8c698dc937e5eb762898)
+        ;
+
+        
+    
+    
+            marker_485b0820c30c7ff6b8724977cde9b095.bindTooltip(
+                `<div>
+                     🏘️ SINACASSY (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_485b0820c30c7ff6b8724977cde9b095.setIcon(icon_9d3dd54b35506a402b6c7f0638b270bf);
+            
+    
+            var marker_bb3355b2c02583b8b1ed879980d934f7 = L.marker(
+                [5.3738495146807805, -3.911789046618327],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_9b4b94c18e09004fd76e0acb699405e6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_00e8b8a8d50bfb1dc07d6d4000fd72cf = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_189ed7b92056e76c764be0da184a8273 = $(`<div id="html_189ed7b92056e76c764be0da184a8273" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Bingerville</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.373850<br>Lon: -3.911789</p>                 </div>                 </div>`)[0];
+                popup_00e8b8a8d50bfb1dc07d6d4000fd72cf.setContent(html_189ed7b92056e76c764be0da184a8273);
+            
+        
+
+        marker_bb3355b2c02583b8b1ed879980d934f7.bindPopup(popup_00e8b8a8d50bfb1dc07d6d4000fd72cf)
+        ;
+
+        
+    
+    
+            marker_bb3355b2c02583b8b1ed879980d934f7.bindTooltip(
+                `<div>
+                     🏘️ Bingerville (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_bb3355b2c02583b8b1ed879980d934f7.setIcon(icon_9b4b94c18e09004fd76e0acb699405e6);
+            
+    
+            var marker_d00b224c9a85af3f87ab1496689640b3 = L.marker(
+                [5.40129441289972, -3.9575031512286167],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_787c5b5fdcaf5eb4590e3adaaeeeefa4 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_bdf312c482bdbbade063a0d3c6d2f9ca = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0b7505c7a9ad1e25f211795de99f9ced = $(`<div id="html_0b7505c7a9ad1e25f211795de99f9ced" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Angré Nouveau CHU</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.401294<br>Lon: -3.957503</p>                 </div>                 </div>`)[0];
+                popup_bdf312c482bdbbade063a0d3c6d2f9ca.setContent(html_0b7505c7a9ad1e25f211795de99f9ced);
+            
+        
+
+        marker_d00b224c9a85af3f87ab1496689640b3.bindPopup(popup_bdf312c482bdbbade063a0d3c6d2f9ca)
+        ;
+
+        
+    
+    
+            marker_d00b224c9a85af3f87ab1496689640b3.bindTooltip(
+                `<div>
+                     🏘️ Angré Nouveau CHU (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_d00b224c9a85af3f87ab1496689640b3.setIcon(icon_787c5b5fdcaf5eb4590e3adaaeeeefa4);
+            
+    
+            var marker_5397027e49baa574f92545bfa334d009 = L.marker(
+                [5.400122425116737, -3.973524589628824],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_663d825fcf722558c600b0c124017a7a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_ce1cb8306a5944499dfd1d2030b39bbd = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fac7c9a5b7792a38652114ef84fb7a0e = $(`<div id="html_fac7c9a5b7792a38652114ef84fb7a0e" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Angré 8ème tranche</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.400122<br>Lon: -3.973525</p>                 </div>                 </div>`)[0];
+                popup_ce1cb8306a5944499dfd1d2030b39bbd.setContent(html_fac7c9a5b7792a38652114ef84fb7a0e);
+            
+        
+
+        marker_5397027e49baa574f92545bfa334d009.bindPopup(popup_ce1cb8306a5944499dfd1d2030b39bbd)
+        ;
+
+        
+    
+    
+            marker_5397027e49baa574f92545bfa334d009.bindTooltip(
+                `<div>
+                     🏘️ Angré 8ème tranche (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_5397027e49baa574f92545bfa334d009.setIcon(icon_663d825fcf722558c600b0c124017a7a);
+            
+    
+            var marker_38c66ff737bd55903aec6690359ba012 = L.marker(
+                [5.393877571118014, -3.987804400747161],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_d07e731545a9aaef860e42cf63c05982 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_b6030bf085fec147614e3c992ce0564d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_9e9466e44fa3c36017f2c25a16a0353c = $(`<div id="html_9e9466e44fa3c36017f2c25a16a0353c" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Angré 7ème tranche</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.393878<br>Lon: -3.987804</p>                 </div>                 </div>`)[0];
+                popup_b6030bf085fec147614e3c992ce0564d.setContent(html_9e9466e44fa3c36017f2c25a16a0353c);
+            
+        
+
+        marker_38c66ff737bd55903aec6690359ba012.bindPopup(popup_b6030bf085fec147614e3c992ce0564d)
+        ;
+
+        
+    
+    
+            marker_38c66ff737bd55903aec6690359ba012.bindTooltip(
+                `<div>
+                     🏘️ Angré 7ème tranche (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_38c66ff737bd55903aec6690359ba012.setIcon(icon_d07e731545a9aaef860e42cf63c05982);
+            
+    
+            var marker_39d78ad428d9e5838b08827ab91bc2b6 = L.marker(
+                [5.36191866602764, -3.9899855609538553],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_0b36e5cefa4a4709c85ae06b5bf09aa6 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_2fac286f2430e8fd06c68dfb73c248f3 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_a5368af62ac5b6a50342430501078180 = $(`<div id="html_a5368af62ac5b6a50342430501078180" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Vallon</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.361919<br>Lon: -3.989986</p>                 </div>                 </div>`)[0];
+                popup_2fac286f2430e8fd06c68dfb73c248f3.setContent(html_a5368af62ac5b6a50342430501078180);
+            
+        
+
+        marker_39d78ad428d9e5838b08827ab91bc2b6.bindPopup(popup_2fac286f2430e8fd06c68dfb73c248f3)
+        ;
+
+        
+    
+    
+            marker_39d78ad428d9e5838b08827ab91bc2b6.bindTooltip(
+                `<div>
+                     🏘️ Vallon (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_39d78ad428d9e5838b08827ab91bc2b6.setIcon(icon_0b36e5cefa4a4709c85ae06b5bf09aa6);
+            
+    
+            var marker_3b61f39eeb4615d36e9f2561a88d4216 = L.marker(
+                [5.340959389928841, -3.9845981408100424],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_467ec85f36b6ebeb5cd1bf964627655f = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_3dee64d4e8daa98a852526b49d1fca2c = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c49fda4b158c5c9beaae07e4df3fc514 = $(`<div id="html_c49fda4b158c5c9beaae07e4df3fc514" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Université FHB Abidjan</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.340959<br>Lon: -3.984598</p>                 </div>                 </div>`)[0];
+                popup_3dee64d4e8daa98a852526b49d1fca2c.setContent(html_c49fda4b158c5c9beaae07e4df3fc514);
+            
+        
+
+        marker_3b61f39eeb4615d36e9f2561a88d4216.bindPopup(popup_3dee64d4e8daa98a852526b49d1fca2c)
+        ;
+
+        
+    
+    
+            marker_3b61f39eeb4615d36e9f2561a88d4216.bindTooltip(
+                `<div>
+                     🏘️ Université FHB Abidjan (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_3b61f39eeb4615d36e9f2561a88d4216.setIcon(icon_467ec85f36b6ebeb5cd1bf964627655f);
+            
+    
+            var marker_151640c9000fb795082edc7766f8323a = L.marker(
+                [5.344282670390227, -3.9934295204307104],
+                {
+}
+            ).addTo(feature_group_09a934ef4c3d03909727ecea0160c60e);
+        
+    
+            var icon_ccfadfaedafb8dc2894cce278cd72b64 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "darkorange",
+  "iconColor": "white",
+  "icon": "building",
+  "prefix": "fa",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+        
+    
+        var popup_765a8eadfa2c1db36d4bd60685c2ba0b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b382088a9673a4d1a5747a4f962179a8 = $(`<div id="html_b382088a9673a4d1a5747a4f962179a8" style="width: 100.0%; height: 100.0%;">                 <div style="min-width: 200px">                     <h4 style="color: darkorange; margin: 0;">🏘️ Mermoz</h4>                     <p><b>Zone:</b> Judée</p>                     <p><b>Position exacte:</b></p>                     <p>Lat: 5.344283<br>Lon: -3.993430</p>                 </div>                 </div>`)[0];
+                popup_765a8eadfa2c1db36d4bd60685c2ba0b.setContent(html_b382088a9673a4d1a5747a4f962179a8);
+            
+        
+
+        marker_151640c9000fb795082edc7766f8323a.bindPopup(popup_765a8eadfa2c1db36d4bd60685c2ba0b)
+        ;
+
+        
+    
+    
+            marker_151640c9000fb795082edc7766f8323a.bindTooltip(
+                `<div>
+                     🏘️ Mermoz (Judée)
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+                marker_151640c9000fb795082edc7766f8323a.setIcon(icon_ccfadfaedafb8dc2894cce278cd72b64);
+            
+    
+            feature_group_09a934ef4c3d03909727ecea0160c60e.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var feature_group_2c473f6524e43a9d5315baab1841c780 = L.featureGroup(
+                {
+}
+            );
+        
+    
+            var poly_line_101bcd190809b3299b95e787d28526dd = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.370240505960099, -3.9556296011142025]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_34e066fe8898b9d6991349c6199407ad = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_b3fcf3ed9be87777a2af0aaed8b5399e = $(`<div id="html_b3fcf3ed9be87777a2af0aaed8b5399e" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Riviera Palmeraie</div>`)[0];
+                popup_34e066fe8898b9d6991349c6199407ad.setContent(html_b3fcf3ed9be87777a2af0aaed8b5399e);
+            
+        
+
+        poly_line_101bcd190809b3299b95e787d28526dd.bindPopup(popup_34e066fe8898b9d6991349c6199407ad)
+        ;
+
+        
+    
+    
+            poly_line_101bcd190809b3299b95e787d28526dd.bindTooltip(
+                `<div>
+                     Vers Riviera Palmeraie - Distance: 1.6 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_90a91167f3509cf5a6637f42386f1b07 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.3665315617355045, -3.9731195924616354]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_5e45d9131ffe39e6ace7290950953317 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0166ff6fa5aae050a36a65341785e51e = $(`<div id="html_0166ff6fa5aae050a36a65341785e51e" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Bonoumin</div>`)[0];
+                popup_5e45d9131ffe39e6ace7290950953317.setContent(html_0166ff6fa5aae050a36a65341785e51e);
+            
+        
+
+        poly_line_90a91167f3509cf5a6637f42386f1b07.bindPopup(popup_5e45d9131ffe39e6ace7290950953317)
+        ;
+
+        
+    
+    
+            poly_line_90a91167f3509cf5a6637f42386f1b07.bindTooltip(
+                `<div>
+                     Vers Bonoumin - Distance: 0.8 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3c85cc8ba99a4d4c71fbaf7da13f12a6 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.345691948843627, -3.9795333438627223]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_b1ffcf759355d96a33f3653a56e97d56 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_6f1a3a0a7fc9bd1b9553f756b52a62d5 = $(`<div id="html_6f1a3a0a7fc9bd1b9553f756b52a62d5" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Riviera 2</div>`)[0];
+                popup_b1ffcf759355d96a33f3653a56e97d56.setContent(html_6f1a3a0a7fc9bd1b9553f756b52a62d5);
+            
+        
+
+        poly_line_3c85cc8ba99a4d4c71fbaf7da13f12a6.bindPopup(popup_b1ffcf759355d96a33f3653a56e97d56)
+        ;
+
+        
+    
+    
+            poly_line_3c85cc8ba99a4d4c71fbaf7da13f12a6.bindTooltip(
+                `<div>
+                     Vers Riviera 2 - Distance: 2.2 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_3bd406298c7f2031398dc02ad9a7550d = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.355229376399118, -3.953351632226753]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_5134f91338c58dac9b03042337ed1208 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_55141ac3817ebb3c67ac7bb98b826cdd = $(`<div id="html_55141ac3817ebb3c67ac7bb98b826cdd" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Riviera 3</div>`)[0];
+                popup_5134f91338c58dac9b03042337ed1208.setContent(html_55141ac3817ebb3c67ac7bb98b826cdd);
+            
+        
+
+        poly_line_3bd406298c7f2031398dc02ad9a7550d.bindPopup(popup_5134f91338c58dac9b03042337ed1208)
+        ;
+
+        
+    
+    
+            poly_line_3bd406298c7f2031398dc02ad9a7550d.bindTooltip(
+                `<div>
+                     Vers Riviera 3 - Distance: 1.7 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_d8f426172efdb93c49f32c21a6666014 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.370622989614985, -3.9820987066853575]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_f9013c4dc9228f1082b9f7e45a7f3e65 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c4bd27b5880982215ef568d0c8108cfa = $(`<div id="html_c4bd27b5880982215ef568d0c8108cfa" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Attoban</div>`)[0];
+                popup_f9013c4dc9228f1082b9f7e45a7f3e65.setContent(html_c4bd27b5880982215ef568d0c8108cfa);
+            
+        
+
+        poly_line_d8f426172efdb93c49f32c21a6666014.bindPopup(popup_f9013c4dc9228f1082b9f7e45a7f3e65)
+        ;
+
+        
+    
+    
+            poly_line_d8f426172efdb93c49f32c21a6666014.bindTooltip(
+                `<div>
+                     Vers Attoban - Distance: 1.9 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_fe42574f8d94d894230e2575f7b3a6d5 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.361325409399416, -3.941685495112414]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_d6bfaaa7186ef8a0c170947845201fd9 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0fef107f94318dcc4b87ab44564b165a = $(`<div id="html_0fef107f94318dcc4b87ab44564b165a" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Riviera Triangle</div>`)[0];
+                popup_d6bfaaa7186ef8a0c170947845201fd9.setContent(html_0fef107f94318dcc4b87ab44564b165a);
+            
+        
+
+        poly_line_fe42574f8d94d894230e2575f7b3a6d5.bindPopup(popup_d6bfaaa7186ef8a0c170947845201fd9)
+        ;
+
+        
+    
+    
+            poly_line_fe42574f8d94d894230e2575f7b3a6d5.bindTooltip(
+                `<div>
+                     Vers Riviera Triangle - Distance: 2.9 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_83b2afef72d58bf30af7f014e84c7d32 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.3428098032171505, -3.969852810231434]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_bf27b923315775768db7bb6f2e406f93 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_d233fa4847bf4952c349d623fa703fc9 = $(`<div id="html_d233fa4847bf4952c349d623fa703fc9" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Anono</div>`)[0];
+                popup_bf27b923315775768db7bb6f2e406f93.setContent(html_d233fa4847bf4952c349d623fa703fc9);
+            
+        
+
+        poly_line_83b2afef72d58bf30af7f014e84c7d32.bindPopup(popup_bf27b923315775768db7bb6f2e406f93)
+        ;
+
+        
+    
+    
+            poly_line_83b2afef72d58bf30af7f014e84c7d32.bindTooltip(
+                `<div>
+                     Vers Anono - Distance: 2.1 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_98837ba36a2a03821fc88243f99ca058 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.3293808119348265, -3.9520930607035063]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_d734ee40a8159ca2df2c8c90e0beb590 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_fc30eb8ef706dbb0071f0b533aa1a52a = $(`<div id="html_fc30eb8ef706dbb0071f0b533aa1a52a" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Riviera Ciad</div>`)[0];
+                popup_d734ee40a8159ca2df2c8c90e0beb590.setContent(html_fc30eb8ef706dbb0071f0b533aa1a52a);
+            
+        
+
+        poly_line_98837ba36a2a03821fc88243f99ca058.bindPopup(popup_d734ee40a8159ca2df2c8c90e0beb590)
+        ;
+
+        
+    
+    
+            poly_line_98837ba36a2a03821fc88243f99ca058.bindTooltip(
+                `<div>
+                     Vers Riviera Ciad - Distance: 4.0 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_af5beb31c435a8fd72c7e19791e75547 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.351136140798523, -3.940897920756014]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_d703704f414e33c0af3748de1d043fd1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4af5db3dd347cddbd189b346062c7445 = $(`<div id="html_4af5db3dd347cddbd189b346062c7445" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Akouedo</div>`)[0];
+                popup_d703704f414e33c0af3748de1d043fd1.setContent(html_4af5db3dd347cddbd189b346062c7445);
+            
+        
+
+        poly_line_af5beb31c435a8fd72c7e19791e75547.bindPopup(popup_d703704f414e33c0af3748de1d043fd1)
+        ;
+
+        
+    
+    
+            poly_line_af5beb31c435a8fd72c7e19791e75547.bindTooltip(
+                `<div>
+                     Vers Akouedo - Distance: 3.2 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_5c693b11407c894031295d869cf780f9 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.365882248951378, -3.9307081605714673]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_20cdc8215e4ad8889394e20b941fa795 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c2a8edb80e7ea4c4322dd5e8e44709f9 = $(`<div id="html_c2a8edb80e7ea4c4322dd5e8e44709f9" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Faya</div>`)[0];
+                popup_20cdc8215e4ad8889394e20b941fa795.setContent(html_c2a8edb80e7ea4c4322dd5e8e44709f9);
+            
+        
+
+        poly_line_5c693b11407c894031295d869cf780f9.bindPopup(popup_20cdc8215e4ad8889394e20b941fa795)
+        ;
+
+        
+    
+    
+            poly_line_5c693b11407c894031295d869cf780f9.bindTooltip(
+                `<div>
+                     Vers Faya - Distance: 4.1 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_c431aa4143f0ff832ba7a384a359669b = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.326019182740508, -3.9157373744692827]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_397a1f3c2e7497a6ee7459a34e816e97 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0359efc0ac7ed2d1ed1be2b9700f8780 = $(`<div id="html_0359efc0ac7ed2d1ed1be2b9700f8780" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Abatta</div>`)[0];
+                popup_397a1f3c2e7497a6ee7459a34e816e97.setContent(html_0359efc0ac7ed2d1ed1be2b9700f8780);
+            
+        
+
+        poly_line_c431aa4143f0ff832ba7a384a359669b.bindPopup(popup_397a1f3c2e7497a6ee7459a34e816e97)
+        ;
+
+        
+    
+    
+            poly_line_c431aa4143f0ff832ba7a384a359669b.bindTooltip(
+                `<div>
+                     Vers Abatta - Distance: 7.0 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_1e946ee975848daa77994b381f89b4d2 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.403654751526298, -3.940281685735934]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_2bfbe2d15186ec97ae2e58661adf7537 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_2dbe50353ddcf2c8313f39f284e23052 = $(`<div id="html_2dbe50353ddcf2c8313f39f284e23052" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Cité SIR Djorogobité</div>`)[0];
+                popup_2bfbe2d15186ec97ae2e58661adf7537.setContent(html_2dbe50353ddcf2c8313f39f284e23052);
+            
+        
+
+        poly_line_1e946ee975848daa77994b381f89b4d2.bindPopup(popup_2bfbe2d15186ec97ae2e58661adf7537)
+        ;
+
+        
+    
+    
+            poly_line_1e946ee975848daa77994b381f89b4d2.bindTooltip(
+                `<div>
+                     Vers Cité SIR Djorogobité - Distance: 5.5 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_d0e767d9ebb89250a3902dd8ed0e5457 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.345855773738112, -3.9493194049716225]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_9c9cfa3221daf651a990dddf5df0fbc1 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_f38aa654426f3220592dfda29ed66c78 = $(`<div id="html_f38aa654426f3220592dfda29ed66c78" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → SINACASSY</div>`)[0];
+                popup_9c9cfa3221daf651a990dddf5df0fbc1.setContent(html_f38aa654426f3220592dfda29ed66c78);
+            
+        
+
+        poly_line_d0e767d9ebb89250a3902dd8ed0e5457.bindPopup(popup_9c9cfa3221daf651a990dddf5df0fbc1)
+        ;
+
+        
+    
+    
+            poly_line_d0e767d9ebb89250a3902dd8ed0e5457.bindTooltip(
+                `<div>
+                     Vers SINACASSY - Distance: 2.7 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_98202fee7303076f6318dbff8875f75d = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.3738495146807805, -3.911789046618327]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_a9ec1fd67ff1939f71f98596e984d49b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_0dc3c142e446d5ab7ef5a1438de9ad43 = $(`<div id="html_0dc3c142e446d5ab7ef5a1438de9ad43" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Bingerville</div>`)[0];
+                popup_a9ec1fd67ff1939f71f98596e984d49b.setContent(html_0dc3c142e446d5ab7ef5a1438de9ad43);
+            
+        
+
+        poly_line_98202fee7303076f6318dbff8875f75d.bindPopup(popup_a9ec1fd67ff1939f71f98596e984d49b)
+        ;
+
+        
+    
+    
+            poly_line_98202fee7303076f6318dbff8875f75d.bindTooltip(
+                `<div>
+                     Vers Bingerville - Distance: 6.3 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_4020bb48312348515b41721106898285 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.40129441289972, -3.9575031512286167]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_6520eabf98ae93b96d0fc1124e844a4b = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_4aea23adb08d1d0b4a636e558d91a6ee = $(`<div id="html_4aea23adb08d1d0b4a636e558d91a6ee" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Angré Nouveau CHU</div>`)[0];
+                popup_6520eabf98ae93b96d0fc1124e844a4b.setContent(html_4aea23adb08d1d0b4a636e558d91a6ee);
+            
+        
+
+        poly_line_4020bb48312348515b41721106898285.bindPopup(popup_6520eabf98ae93b96d0fc1124e844a4b)
+        ;
+
+        
+    
+    
+            poly_line_4020bb48312348515b41721106898285.bindTooltip(
+                `<div>
+                     Vers Angré Nouveau CHU - Distance: 4.5 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_8c2802603f210750ab98f85e32b2b635 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.400122425116737, -3.973524589628824]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_71859e3393c354966b933fd35974741d = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_c3df828fcb6d97854371ab49ce0a294e = $(`<div id="html_c3df828fcb6d97854371ab49ce0a294e" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Angré 8ème tranche</div>`)[0];
+                popup_71859e3393c354966b933fd35974741d.setContent(html_c3df828fcb6d97854371ab49ce0a294e);
+            
+        
+
+        poly_line_8c2802603f210750ab98f85e32b2b635.bindPopup(popup_71859e3393c354966b933fd35974741d)
+        ;
+
+        
+    
+    
+            poly_line_8c2802603f210750ab98f85e32b2b635.bindTooltip(
+                `<div>
+                     Vers Angré 8ème tranche - Distance: 4.3 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_ab20d4a1cd923a4056e64ec4e243c820 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.393877571118014, -3.987804400747161]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_4a98fdcc6fa09d2bfda614ebf50058c0 = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_368ae0ba4ef9e93b9427013421e4b50d = $(`<div id="html_368ae0ba4ef9e93b9427013421e4b50d" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Angré 7ème tranche</div>`)[0];
+                popup_4a98fdcc6fa09d2bfda614ebf50058c0.setContent(html_368ae0ba4ef9e93b9427013421e4b50d);
+            
+        
+
+        poly_line_ab20d4a1cd923a4056e64ec4e243c820.bindPopup(popup_4a98fdcc6fa09d2bfda614ebf50058c0)
+        ;
+
+        
+    
+    
+            poly_line_ab20d4a1cd923a4056e64ec4e243c820.bindTooltip(
+                `<div>
+                     Vers Angré 7ème tranche - Distance: 4.2 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_6770bdd898bb5f7dac3b6245e5a1eac2 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.36191866602764, -3.9899855609538553]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_fc2d4acf221be2ecd4c0736fa75536ce = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_70bd27fcb5182ed0456abc3005162bc3 = $(`<div id="html_70bd27fcb5182ed0456abc3005162bc3" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Vallon</div>`)[0];
+                popup_fc2d4acf221be2ecd4c0736fa75536ce.setContent(html_70bd27fcb5182ed0456abc3005162bc3);
+            
+        
+
+        poly_line_6770bdd898bb5f7dac3b6245e5a1eac2.bindPopup(popup_fc2d4acf221be2ecd4c0736fa75536ce)
+        ;
+
+        
+    
+    
+            poly_line_6770bdd898bb5f7dac3b6245e5a1eac2.bindTooltip(
+                `<div>
+                     Vers Vallon - Distance: 2.5 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_93992c8e8ce4ca29ad77bc472773d774 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.340959389928841, -3.9845981408100424]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_9fb5c4b8656a175fc9952bca4260c86e = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_7ea52bfb2a2334d8beda7f4ee4a68cfa = $(`<div id="html_7ea52bfb2a2334d8beda7f4ee4a68cfa" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Université FHB Abidjan</div>`)[0];
+                popup_9fb5c4b8656a175fc9952bca4260c86e.setContent(html_7ea52bfb2a2334d8beda7f4ee4a68cfa);
+            
+        
+
+        poly_line_93992c8e8ce4ca29ad77bc472773d774.bindPopup(popup_9fb5c4b8656a175fc9952bca4260c86e)
+        ;
+
+        
+    
+    
+            poly_line_93992c8e8ce4ca29ad77bc472773d774.bindTooltip(
+                `<div>
+                     Vers Université FHB Abidjan - Distance: 3.0 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var poly_line_fbb82c45fdee20c79549d64cb62d8ff0 = L.polyline(
+                [[5.361824523656798, -3.967683740514682], [5.344282670390227, -3.9934295204307104]],
+                {"bubblingMouseEvents": true, "color": "#666666", "dashArray": "5, 8", "dashOffset": null, "fill": false, "fillColor": "#666666", "fillOpacity": 0.2, "fillRule": "evenodd", "lineCap": "round", "lineJoin": "round", "noClip": false, "opacity": 0.7, "smoothFactor": 1.0, "stroke": true, "weight": 2}
+            ).addTo(feature_group_2c473f6524e43a9d5315baab1841c780);
+        
+    
+        var popup_161f183bd306cc5301b0046720227add = L.popup({
+  "maxWidth": "100%",
+});
+
+        
+            
+                var html_831eb097d8b371eca3689edccafbb116 = $(`<div id="html_831eb097d8b371eca3689edccafbb116" style="width: 100.0%; height: 100.0%;"><b>Itinéraire:</b> Église → Mermoz</div>`)[0];
+                popup_161f183bd306cc5301b0046720227add.setContent(html_831eb097d8b371eca3689edccafbb116);
+            
+        
+
+        poly_line_fbb82c45fdee20c79549d64cb62d8ff0.bindPopup(popup_161f183bd306cc5301b0046720227add)
+        ;
+
+        
+    
+    
+            poly_line_fbb82c45fdee20c79549d64cb62d8ff0.bindTooltip(
+                `<div>
+                     Vers Mermoz - Distance: 3.5 km
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            feature_group_2c473f6524e43a9d5315baab1841c780.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            var layer_control_4573436d53ea67f86b133f88db4eeeaf_layers = {
+                base_layers : {
+                    "openstreetmap" : tile_layer_55f0417c0228e44aadcc9b596a552994,
+                },
+                overlays :  {
+                    "\ud83d\udd35 Zones" : feature_group_b1377c8456713a528cc9ad30780349a4,
+                    "\ud83c\udfdb\ufe0f \u00c9glise" : feature_group_9ca595aed986f1f9587d6aaf7f4d8e9b,
+                    "\ud83c\udfd8\ufe0f Quartiers" : feature_group_09a934ef4c3d03909727ecea0160c60e,
+                    "\ud83d\udee3\ufe0f Itin\u00e9raires" : feature_group_2c473f6524e43a9d5315baab1841c780,
+                },
+            };
+            let layer_control_4573436d53ea67f86b133f88db4eeeaf = L.control.layers(
+                layer_control_4573436d53ea67f86b133f88db4eeeaf_layers.base_layers,
+                layer_control_4573436d53ea67f86b133f88db4eeeaf_layers.overlays,
+                {
+  "position": "topright",
+  "collapsed": false,
+  "autoZIndex": true,
+}
+            ).addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+
+        
+    
+            tile_layer_55f0417c0228e44aadcc9b596a552994.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            feature_group_b1377c8456713a528cc9ad30780349a4.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+                marker_624dfb1628a9d3a804f126d822b1b02c.setIcon(icon_bb205d0ca2f3f260935591e14cf2a13f);
+            
+    
+            feature_group_9ca595aed986f1f9587d6aaf7f4d8e9b.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+                marker_5344009ecb99d7b3a5e88bd69087b71a.setIcon(icon_146869d455829bcabc222a4b76af17f9);
+            
+    
+                marker_299ba7d82d51aa316cf73074b3539037.setIcon(icon_bcf52facc82e14e0dd94736f4d400b7d);
+            
+    
+                marker_4b176dd7aaa86a31f9dc1c2efba1aaca.setIcon(icon_27efdad3bdc1aa22d87270a07b5f2b43);
+            
+    
+                marker_7def39aac42b66469db395192419e46f.setIcon(icon_9a122d270a6131baa8238ca250f24d13);
+            
+    
+                marker_ea7bcabb3ed947ed073cd7eac0134168.setIcon(icon_07bd54977874e970b33fb43872a67147);
+            
+    
+                marker_b0c12abea6784a8bd5216b2489317592.setIcon(icon_1a5f9b11ca51eedd764ceab39807ba3a);
+            
+    
+                marker_a96edc6a730d3f2fca037ade16329712.setIcon(icon_ea6c9aa3b8d7d979fec6529eb5e027cd);
+            
+    
+                marker_c2520a47375227fa8dfec78dd0890106.setIcon(icon_90c8e1c0fe79a6a2e7c3bb467dfd7ee2);
+            
+    
+                marker_3d1a2b06672dea393e8def2c7f7f61b9.setIcon(icon_d76278ba0655be3b2fd4bf3ce3f94ad6);
+            
+    
+                marker_0eb11947bb35b09ca074c96d9aafe4a8.setIcon(icon_71680e8f4aa56a902dfbf19905757377);
+            
+    
+                marker_7c2bde7e7386d26143918ed76c44b9fc.setIcon(icon_90183ab81bcfdba1c53d0cc8d08f9001);
+            
+    
+                marker_df22633c69a18b65533f1bbb7cfd7140.setIcon(icon_b9ff6e14bab67561830b9e0fbd2cfe78);
+            
+    
+                marker_485b0820c30c7ff6b8724977cde9b095.setIcon(icon_9d3dd54b35506a402b6c7f0638b270bf);
+            
+    
+                marker_bb3355b2c02583b8b1ed879980d934f7.setIcon(icon_9b4b94c18e09004fd76e0acb699405e6);
+            
+    
+                marker_d00b224c9a85af3f87ab1496689640b3.setIcon(icon_787c5b5fdcaf5eb4590e3adaaeeeefa4);
+            
+    
+                marker_5397027e49baa574f92545bfa334d009.setIcon(icon_663d825fcf722558c600b0c124017a7a);
+            
+    
+                marker_38c66ff737bd55903aec6690359ba012.setIcon(icon_d07e731545a9aaef860e42cf63c05982);
+            
+    
+                marker_39d78ad428d9e5838b08827ab91bc2b6.setIcon(icon_0b36e5cefa4a4709c85ae06b5bf09aa6);
+            
+    
+                marker_3b61f39eeb4615d36e9f2561a88d4216.setIcon(icon_467ec85f36b6ebeb5cd1bf964627655f);
+            
+    
+                marker_151640c9000fb795082edc7766f8323a.setIcon(icon_ccfadfaedafb8dc2894cce278cd72b64);
+            
+    
+            feature_group_09a934ef4c3d03909727ecea0160c60e.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+    
+            feature_group_2c473f6524e43a9d5315baab1841c780.addTo(map_4ca40ea0faa133aae61423deb0b0d30b);
+        
+</script>
+</html>
