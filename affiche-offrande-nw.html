@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>New Wine Church - Offrandes & Dîmes</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .poster-wrapper {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        #poster {
+            background: white;
+            border-radius: 48px;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25);
+        }
+
+        .poster-landscape {
+            display: flex;
+            flex-direction: row;
+        }
+
+        /* PARTIE GAUCHE */
+        .poster-left {
+            flex: 1.2;
+            background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #d946ef 100%);
+            padding: 48px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .poster-left h2 {
+            color: white;
+            font-size: clamp(28px, 5vw, 48px);
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+        }
+
+        .poster-left p {
+            color: rgba(255,255,255,0.9);
+            font-size: clamp(14px, 2vw, 18px);
+            line-height: 1.5;
+            margin-bottom: 32px;
+        }
+
+        .verse {
+            background: rgba(255,255,255,0.15);
+            border-radius: 20px;
+            padding: 20px;
+            border-left: 4px solid #fbbf24;
+        }
+
+        .verse p {
+            font-style: italic;
+            color: white;
+            font-size: 14px;
+        }
+
+        .verse small {
+            display: block;
+            margin-top: 8px;
+            font-weight: 700;
+            color: #fbbf24;
+        }
+
+        /* PARTIE DROITE */
+        .poster-right {
+            flex: 1;
+            padding: 48px;
+            background: white;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 32px;
+        }
+
+        /* SOLUTION PRO : conteneur fixe avec centrage parfait */
+        .logo-circle {
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+        }
+
+        .logo-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .logo-circle span {
+            color: white;
+            font-weight: 900;
+            font-size: 24px;
+        }
+
+        .church-info h3 {
+            font-size: 18px;
+            font-weight: 800;
+            color: #1e293b;
+        }
+
+        .church-info p {
+            font-size: 10px;
+            color: #94a3b8;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
+
+        .title-section {
+            margin-bottom: 32px;
+        }
+
+        .title-section h1 {
+            font-size: clamp(28px, 4vw, 36px);
+            font-weight: 900;
+            background: linear-gradient(135deg, #6366f1, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .title-section .subtitle {
+            color: #64748b;
+            font-weight: 600;
+            font-size: 14px;
+            letter-spacing: 2px;
+        }
+
+        .payment-methods {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 32px;
+        }
+
+        .method-card {
+            background: #f8fafc;
+            border-radius: 20px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid #e2e8f0;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .method-card:hover {
+            transform: translateX(8px);
+            border-color: #8b5cf6;
+        }
+
+        /* SOLUTION PRO : conteneur fixe pour logos opérateurs */
+        .operator-logo {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .operator-logo img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+        }
+
+        .operator-logo span {
+            font-weight: 900;
+            font-size: 18px;
+        }
+
+        .method-info {
+            flex: 1;
+        }
+
+        .method-name {
+            font-weight: 800;
+            font-size: 14px;
+            color: #64748b;
+            letter-spacing: 1px;
+            margin-bottom: 4px;
+        }
+
+        .method-number {
+            font-weight: 900;
+            font-size: 18px;
+            color: #1e293b;
+        }
+
+        .copy-badge {
+            background: #e2e8f0;
+            padding: 6px 12px;
+            border-radius: 30px;
+            font-size: 11px;
+            font-weight: 700;
+            color: #64748b;
+            white-space: nowrap;
+        }
+
+        .method-card:hover .copy-badge {
+            background: #8b5cf6;
+            color: white;
+        }
+
+        .poster-footer {
+            text-align: center;
+            padding-top: 24px;
+            border-top: 2px dashed #e2e8f0;
+        }
+
+        .poster-footer p {
+            color: #94a3b8;
+            font-size: 12px;
+        }
+
+        .poster-footer strong {
+            background: linear-gradient(135deg, #6366f1, #d946ef);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .download-btn {
+            margin-top: 24px;
+            background: linear-gradient(135deg, #6366f1, #8b5cf6);
+            color: white;
+            border: none;
+            padding: 14px 32px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 14px;
+            cursor: pointer;
+            width: 100%;
+            max-width: 300px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(99,102,241,0.4);
+        }
+
+        @media (max-width: 768px) {
+            .poster-landscape {
+                flex-direction: column;
+            }
+            .poster-left, .poster-right {
+                padding: 32px;
+            }
+            .logo-circle {
+                width: 55px;
+                height: 55px;
+            }
+            .operator-logo {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="poster-wrapper">
+        <div id="poster">
+            <div class="poster-landscape">
+                
+                <!-- PARTIE GAUCHE -->
+                <div class="poster-left">
+                    <h2>Donner avec joie,<br>c'est semer dans l'éternité</h2>
+                    <p>Votre offrande et votre dîme participent à l'expansion du royaume de Dieu.</p>
+                    <div class="verse">
+                        <p>« Que chacun donne comme il l'a décidé en son cœur, sans tristesse ni contrainte, car Dieu aime celui qui donne avec joie. »</p>
+                        <small>2 Corinthiens 9:7</small>
+                    </div>
+                </div>
+                
+                <!-- PARTIE DROITE -->
+                <div class="poster-right">
+                    
+                    <!-- LOGO ÉGLISE -->
+                    <div class="logo-area">
+                        <div class="" id="churchLogoContainer">
+                            <img id="" src="publics/images/LOGO-NEW-WINE-png.png" alt="Logo" style="width:80px; height:80px; object-fit:cover;">
+                        </div>
+                        <div class="church-info">
+                            <h3 style="font-size: 30px;">NEW WINE CHURCH</h3>
+                            <p>Eglise La Maison De La Destinée</p>
+                        </div>
+                    </div>
+                    
+                    <div class="title-section">
+                        <h1>OFFRANDES & DÎMES</h1>
+                        <div class="subtitle">EN LIGNE • 24H/24 7J/7</div>
+                    </div>
+                    
+                    <div class="payment-methods">
+                        
+                        <!-- ORANGE MONEY -->
+                        <div class="method-card" onclick="copyNumber('07 10 31 21 08')">
+                            <div class="operator-logo" id="omContainer">
+                                <img id="" src="publics/images/om.jpg" alt="OM" style="width:500px; height:60px; object-fit:contain; border-radius:100%;">
+                            </div>
+                            <div class="method-info">
+                                <div class="method-name">ORANGE MONEY</div>
+                                <div class="method-number">07 10 31 21 08</div>
+                            </div>
+                            <!-- <div class="copy-badge">📋 Copier</div> -->
+                        </div>
+                        
+                        <!-- MTN MOMO -->
+                        <div class="method-card" onclick="copyNumber('05 01 31 60 73')">
+                            <div class="operator-logo" id="mtnContainer">
+                                <img id="" src="publics/images/mtn.jpg" alt="MTN" style="width:600px; height:75px; object-fit:contain; border-radius:100%;">
+                            </div>
+                            <div class="method-info">
+                                <div class="method-name">MTN MOMO</div>
+                                <div class="method-number">05 01 31 60 73</div>
+                            </div>
+                            <!-- <div class="copy-badge">📋 Copier</div> -->
+                        </div>
+                        
+                        <!-- WAVE -->
+                        <div class="method-card" onclick="copyNumber('05 01 31 60 73')">
+                            <div class="operator-logo" id="waveContainer">
+                                <img id="" src="publics/images/wave.jpg" alt="Wave" style="width:501px; height:100px; object-fit:contain; border-radius:100%;">
+                            </div>
+                            <div class="method-info">
+                                <div class="method-name">WAVE</div>
+                                <div class="method-number">05 01 31 60 73</div>
+                            </div>
+                            <!-- <div class="copy-badge">📋 Copier</div> -->
+                        </div>
+                    </div>
+                    
+                    <div class="poster-footer">
+                        <p>🙏 <strong>Dieu bénit celui qui donne avec joie</strong> 🙏</p>
+                        <p style="font-size: 10px; margin-top: 12px;">Tous les dons sont reçus avec gratitude</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <button id="btn-download" class="download-btn">📸 TÉLÉCHARGER L'IMAGE (PNG)</button>
+    </div>
+
+    <script>
+        function copyNumber(number) {
+            navigator.clipboard.writeText(number);
+            alert(`📋 Numéro ${number} copié !`);
+        }
+
+        // Chargement des logos avec fallback
+        function loadLogo(imgElement, textElement, container, src, bgColor, textColor, fontSize) {
+            if (!src || src === "") {
+                textElement.style.display = 'flex';
+                return;
+            }
+            
+            const img = new Image();
+            img.onload = function() {
+                imgElement.src = src;
+                imgElement.style.display = 'block';
+                textElement.style.display = 'none';
+                container.style.background = 'white';
+            };
+            img.onerror = function() {
+                imgElement.style.display = 'none';
+                textElement.style.display = 'flex';
+                container.style.background = bgColor;
+                textElement.style.color = textColor;
+                textElement.style.fontSize = fontSize;
+                textElement.style.fontWeight = '900';
+            };
+            img.src = src;
+        }
+
+        // Charger tous les logos
+        loadLogo(
+            document.getElementById('churchLogo'),
+            document.getElementById('churchLogoText'),
+            document.getElementById('churchLogoContainer'),
+            '/publics/images/LOGO-NEW-WINE-png.png',
+            'linear-gradient(135deg, #6366f1, #8b5cf6)',
+            'white',
+            '24px'
+        );
+
+        loadLogo(
+            document.getElementById('omLogo'),
+            document.getElementById('omText'),
+            document.getElementById('omContainer'),
+            '/publics/images/om.jpg',
+            'linear-gradient(135deg, #FF7900, #FF5500)',
+            'white',
+            '20px'
+        );
+
+        loadLogo(
+            document.getElementById('mtnLogo'),
+            document.getElementById('mtnText'),
+            document.getElementById('mtnContainer'),
+            '/publics/images/mtn.jpg',
+            'linear-gradient(135deg, #FFCC00, #FF9900)',
+            '#1e293b',
+            '16px'
+        );
+
+        loadLogo(
+            document.getElementById('waveLogo'),
+            document.getElementById('waveText'),
+            document.getElementById('waveContainer'),
+            '/publics/images/wave.jpg',
+            'linear-gradient(135deg, #1998ff, #0066cc)',
+            'white',
+            '20px'
+        );
+
+        // Téléchargement
+        document.getElementById('btn-download').addEventListener('click', async function() {
+            const btn = this;
+            const originalText = btn.innerHTML;
+            
+            btn.innerHTML = "⏳ GÉNÉRATION...";
+            btn.disabled = true;
+            
+            try {
+                const poster = document.getElementById('poster');
+                const images = poster.querySelectorAll('img');
+                
+                await Promise.all([...images].map(img => {
+                    if (img.complete) return Promise.resolve();
+                    return new Promise(resolve => {
+                        img.onload = resolve;
+                        img.onerror = resolve;
+                    });
+                }));
+                
+                const canvas = await html2canvas(poster, {
+                    scale: 3,
+                    backgroundColor: '#ffffff',
+                    useCORS: true
+                });
+                
+                canvas.toBlob(blob => {
+                    const url = URL.createObjectURL(blob);
+                    const link = document.createElement('a');
+                    link.download = 'NewWineChurch_Offrandes.png';
+                    link.href = url;
+                    link.click();
+                    URL.revokeObjectURL(url);
+                    
+                    btn.innerHTML = originalText;
+                    btn.disabled = false;
+                });
+                
+            } catch (err) {
+                alert('Erreur: ' + err.message);
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>
